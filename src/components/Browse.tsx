@@ -1,9 +1,18 @@
-import React from 'react'
+import Header from "./Header";
+import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
+import MainContainer from "./MainContainer";
+import SecondaryContainer from "./SecondaryContainer";
+import usePopularMovies from "../hooks/usePopularMovies";
 
-const  Browse: React.FC = () => {
+const Browse = () => {
+  useNowPlayingMovies();
+  usePopularMovies();
   return (
-    <div>Browse</div>
-  )
-}
-
-export default Browse
+    <>
+      <Header />
+      <MainContainer />
+      <SecondaryContainer />
+    </>
+  );
+};
+export default Browse;
