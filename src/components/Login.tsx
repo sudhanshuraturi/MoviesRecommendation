@@ -9,7 +9,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { addUser } from "../utils/userSlice";
+import { addUser } from "../redux/slices/userSlice";
 
 const Login: React.FC = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);

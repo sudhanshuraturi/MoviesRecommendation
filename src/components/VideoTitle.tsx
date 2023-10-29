@@ -1,7 +1,4 @@
-interface VideoTitleType {
-  title: string;
-  overview: string;
-}
+import { VideoTitleType } from "../utils/types";
 
 const VideoTitle: React.FC<VideoTitleType> = ({ title, overview }) => {
   return (

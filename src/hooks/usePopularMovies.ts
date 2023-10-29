@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
-import { addPopularMovies } from "../utils/moviesSlice";
-import { RootState } from "../utils/store";
+import { addPopularMovies } from "../redux/slices/moviesSlice";
+import { RootState } from "../redux/store";
 
 const usePopularMovies = () => {
   // Fetch Data from TMDB API and update store

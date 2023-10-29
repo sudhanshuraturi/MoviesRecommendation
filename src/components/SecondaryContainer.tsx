@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import MovieList from "./MovieList";
-import { RootState } from "../utils/store";
+import { RootState } from "../redux/store";
 
 const SecondaryContainer = () => {
   const movies = useSelector((store: RootState) => store.movies);

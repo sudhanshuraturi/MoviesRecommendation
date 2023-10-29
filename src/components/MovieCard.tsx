@@ -1,8 +1,5 @@
 import { IMG_CDN_URL } from "../utils/constants";
-
-interface MovieCardType {
-  posterPath: string;
-}
+import { MovieCardType } from "../utils/types";
 
 const MovieCard: React.FC<MovieCardType> = ({ posterPath }) => {
   if (!posterPath) return null;
