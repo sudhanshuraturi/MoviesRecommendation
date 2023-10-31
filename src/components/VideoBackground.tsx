@@ -11,13 +11,14 @@ const VideoBackground: React.FC<VideoBackgroundType> = ({ movieId }) => {
   useMovieTrailer(movieId);
 
   return (
-    <div className=" w-screen">
+    <div className="w-screen overflow-hidden">
       <iframe
-        className="w-screen aspect-video"
+        id="ytplayer"
+        className="h-screen w-screen pointer-events-none"
         src={
           "https://www.youtube.com/embed/" +
           trailerVideo?.key +
-          "?&autoplay=1&mute=1"
+          "?autoplay=1&mute=1&controls=0&loop=1"
         }
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -25,4 +26,5 @@ const VideoBackground: React.FC<VideoBackgroundType> = ({ movieId }) => {
     </div>
   );
 };
+
 export default VideoBackground;

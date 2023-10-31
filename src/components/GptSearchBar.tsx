@@ -9,7 +9,7 @@ import { RootState } from "../redux/store";
 const GptSearchBar = () => {
   const dispatch = useDispatch();
   const langKey = useSelector((store: RootState) => store.config.lang);
-  const searchText: React.RefObject<HTMLInputElement> = useRef(null);
+  const searchText = useRef<HTMLInputElement>(null);
 
   // search movie in TMDB
   const searchMovieTMDB = async (movie: string) => {

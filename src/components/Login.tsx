@@ -16,9 +16,9 @@ const Login: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const dispatch = useDispatch();
 
-  const name: React.RefObject<HTMLInputElement> = useRef(null);
-  const email: React.RefObject<HTMLInputElement> = useRef(null);
-  const password: React.RefObject<HTMLInputElement> = useRef(null);
+  const name = useRef<HTMLInputElement>(null);
+  const email = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
 
   const handleButtonClick = () => {
     const message = checkValidData(
@@ -77,7 +77,7 @@ const Login: React.FC = () => {
       )
         .then((userCredential) => {
           // Signed in
-          const user = userCredential.user;
+          // const user = userCredential.user;
         })
         .catch((error) => {
           const errorCode = error.code;

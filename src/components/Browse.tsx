@@ -14,17 +14,17 @@ const Browse = () => {
   useNowPlayingMovies();
   usePopularMovies();
   return (
-    <>
+    <div className="no-scrollbar">
       <Header />
       {showGptSearch ? (
         <GptSearch />
       ) : (
-        <>
+        <div className="bg-black w-full no-scrollbar">
           <MainContainer />
           <SecondaryContainer />
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 export default Browse;

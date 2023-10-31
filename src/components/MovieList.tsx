@@ -1,18 +1,13 @@
-import {
-  MovieListType,
-  Result,
-  MovieType,
-  PopularMovieType,
-} from "../utils/types";
+import { MovieListType } from "../utils/types";
 
 import MovieCard from "./MovieCard";
 
 const MovieList: React.FC<MovieListType> = ({ title, movies }) => {
   return (
-    <div className="px-6 ">
-      <h1 className="text-lg md:text-3xl py-4 text-white">{title}</h1>
-      <div className="flex overflow-x-scroll">
-        <div className="flex">
+    <div className="p-6">
+      <h1 className="text-lg font-extrabold py-4 text-white">{title}</h1>
+      <div className="flex overflow-x-scroll no-scrollbar">
+        <div className="flex gap-4">
           {movies?.map(
             (movie) =>
               movie.poster_path && (
