@@ -7,7 +7,6 @@ export const USER_AVATAR = 'https://occ-0-6247-2164.1.nflxso.net/dnm/api/v6/K6hj
 export const SUPPORTED_LANGUAGES = [
     { identifier: "en", name: "English" },
     { identifier: "hindi", name: "Hindi" },
-    { identifier: "spanish", name: "Spanish" },
   ];
 
 export const API_OPTIONS = {
