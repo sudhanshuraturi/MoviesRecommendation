@@ -90,6 +90,9 @@ const Login: React.FC = () => {
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
     setErrorMessage(null);
+    if (name.current?.value) name.current.value = "";
+    if (email.current?.value) email.current.value = "";
+    if (password.current?.value) password.current.value = "";
   };
   return (
     <div
