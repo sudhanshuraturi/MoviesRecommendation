@@ -141,7 +141,7 @@ const Login: React.FC = () => {
             onClick={toggleSignInForm}
           >
             {isSignInForm
-              ? "New to Netflix? Sign Up Now"
+              ? "New User ? Sign Up Now"
               : "Already registered? Sign In Now."}
           </p>
         </form>

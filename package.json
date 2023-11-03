@@ -1,5 +1,5 @@
 {
-  "name": "netflix",
+  "name": "movies_recommendation",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
