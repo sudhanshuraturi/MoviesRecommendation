@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { addUser } from "../redux/slices/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -19,6 +20,7 @@ const Login: React.FC = () => {
   const name = useRef<HTMLInputElement>(null);
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     const message = checkValidData(
@@ -29,61 +31,63 @@ const Login: React.FC = () => {
     setErrorMessage(message);
 
     if (message) return;
-
-    if (!isSignInForm) {
-      // Sign Up Logic
-      createUserWithEmailAndPassword(
-        auth,
-        email?.current?.value!,
-        password?.current?.value!
-      )
-        .then((userCredential) => {
-          const user = userCredential.user;
-          updateProfile(user, {
-            displayName: name?.current?.value,
-            photoURL: USER_AVATAR,
-          })
-            .then(() => {
-              const { uid, email, displayName, photoURL } =
-                auth.currentUser || {};
-              if (uid && email && displayName && photoURL) {
-                dispatch(
-                  addUser({
-                    uid: uid,
-                    email: email,
-                    displayName: displayName,
-                    photoURL: photoURL,
-                  })
-                );
-              } else {
-                throw new Error("Incomplete User Data");
-              }
+    if (email.current && password.current) {
+      if (!isSignInForm) {
+        // Sign Up Logic
+        createUserWithEmailAndPassword(
+          auth,
+          email?.current?.value,
+          password?.current?.value
+        )
+          .then((userCredential) => {
+            const user = userCredential.user;
+            updateProfile(user, {
+              displayName: name?.current?.value,
+              photoURL: USER_AVATAR,
             })
-            .catch((error) => {
-              setErrorMessage(error.message);
-            });
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrorMessage(errorCode + "-" + errorMessage);
-        });
-    } else {
-      // Sign In Logic
-      signInWithEmailAndPassword(
-        auth,
-        email?.current?.value!,
-        password?.current?.value!
-      )
-        .then((userCredential) => {
-          // Signed in
-          // const user = userCredential.user;
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrorMessage(errorCode + "-" + errorMessage);
-        });
+              .then(() => {
+                const { uid, email, displayName, photoURL } =
+                  auth.currentUser || {};
+                if (uid && email && displayName && photoURL) {
+                  dispatch(
+                    addUser({
+                      uid: uid,
+                      email: email,
+                      displayName: displayName,
+                      photoURL: photoURL,
+                    })
+                  );
+                  navigate("/browse");
+                } else {
+                  throw new Error("Incomplete User Data");
+                }
+              })
+              .catch((error) => {
+                setErrorMessage(error.message);
+              });
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setErrorMessage(errorCode + "-" + errorMessage);
+          });
+      } else {
+        // Sign In Logic
+        signInWithEmailAndPassword(
+          auth,
+          email?.current?.value,
+          password?.current?.value
+        )
+          .then((userCredential) => {
+            // Signed in
+            // const user = userCredential.user;
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setErrorMessage(errorCode + "-" + errorMessage);
+          });
+      }
     }
   };
 
@@ -94,6 +98,7 @@ const Login: React.FC = () => {
     if (email.current?.value) email.current.value = "";
     if (password.current?.value) password.current.value = "";
   };
+
   return (
     <div
       className={`bg-cover h-screen `}

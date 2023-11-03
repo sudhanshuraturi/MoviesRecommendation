@@ -57,7 +57,7 @@ const Header = () => {
 
   return (
     <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
-      <div className="w-60 mx-auto md:mx-0">
+      <div className="w-42 h-[55px] mx-auto md:mx-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="external-icon"
