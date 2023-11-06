@@ -1,4 +1,4 @@
-import { MovieListType } from "../utils/types";
+import { MovieListType } from "../../utils/types";
 
 import MovieCard from "./MovieCard";
 

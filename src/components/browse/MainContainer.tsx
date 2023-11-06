@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import VideoBackground from "./VideoBackground";
 import VideoTitle from "./VideoTitle";
-import { RootState } from "../redux/store";
+import { RootState } from "../../redux/store";
 
 const MainContainer: React.FC = () => {
   const movies = useSelector(

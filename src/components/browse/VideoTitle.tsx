@@ -1,4 +1,4 @@
-import { VideoTitleType } from "../utils/types";
+import { VideoTitleType } from "../../utils/types";
 
 const VideoTitle: React.FC<VideoTitleType> = ({ title, overview }) => {
   return (

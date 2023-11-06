@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import Header from "./Header";
+import Header from "./common/Header";
 import { USER_AVATAR, BACKGROUND } from "../utils/constants";
 import { checkValidData } from "../utils/validate";
 import {

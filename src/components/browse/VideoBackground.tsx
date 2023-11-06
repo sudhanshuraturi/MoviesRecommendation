@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import useMovieTrailer from "../hooks/useMovieTrailer";
-import { RootState } from "../redux/store";
-import { VideoBackgroundType } from "../utils/types";
+import useMovieTrailer from "../../hooks/useMovieTrailer";
+import { RootState } from "../../redux/store";
+import { VideoBackgroundType } from "../../utils/types";
 
 const VideoBackground: React.FC<VideoBackgroundType> = ({ movieId }) => {
   const trailerVideo = useSelector(
@@ -11,10 +11,10 @@ const VideoBackground: React.FC<VideoBackgroundType> = ({ movieId }) => {
   useMovieTrailer(movieId);
 
   return (
-    <div className="w-screen overflow-hidden">
+    <div className="w-full">
       <iframe
         id="ytplayer"
-        className="h-screen w-screen pointer-events-none"
+        className="h-screen w-full pointer-events-none"
         src={
           "https://www.youtube.com/embed/" +
           trailerVideo?.key +

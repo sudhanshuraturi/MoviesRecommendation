@@ -1,11 +1,11 @@
-import Header from "./Header";
-import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
+import Header from "../common/Header";
+import useNowPlayingMovies from "../../hooks/useNowPlayingMovies";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
-import usePopularMovies from "../hooks/usePopularMovies";
+import usePopularMovies from "../../hooks/usePopularMovies";
 import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
-import GptSearch from "./GptSearch";
+import { RootState } from "../../redux/store";
+import GptSearch from "../gptMovieSuggestions/GptSearch";
 
 const Browse = () => {
   const showGptSearch = useSelector(

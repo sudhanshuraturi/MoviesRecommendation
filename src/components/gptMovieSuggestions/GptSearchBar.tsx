@@ -1,12 +1,13 @@
-import openai from "../utils/openai";
-import { useRef } from "react";
+import openai from "../../utils/openai";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import lang from "../utils/languageConstants";
-import { API_OPTIONS } from "../utils/constants";
-import { addGptMovieResult } from "../redux/slices/gptSlice";
-import { RootState } from "../redux/store";
+import lang from "../../utils/languageConstants";
+import { API_OPTIONS } from "../../utils/constants";
+import { addGptMovieResult } from "../../redux/slices/gptSlice";
+import { RootState } from "../../redux/store";
 
 const GptSearchBar = () => {
+  const [disableSearch, setSearchDisabled] = useState(true);
   const dispatch = useDispatch();
   const langKey = useSelector((store: RootState) => store.config.lang);
   const searchText = useRef<HTMLInputElement>(null);
@@ -25,8 +26,6 @@ const GptSearchBar = () => {
   };
 
   const handleGptSearchClick = async () => {
-    // Make an API call to GPT API and get Movie Results
-
     const gptQuery =
       "Act as a Movie Recommendation system and suggest some movies for the query : " +
       searchText?.current?.value +
@@ -60,17 +59,25 @@ const GptSearchBar = () => {
     <div className="pt-[35%] md:pt-[10%] flex justify-center">
       <form
         className="w-full md:w-1/2 bg-black grid grid-cols-12"
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => e.preventDefault()}
       >
         <input
           ref={searchText}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            e.target?.value
+              ? setSearchDisabled(false)
+              : setSearchDisabled(true);
+          }}
           type="text"
           className=" p-4 m-4 col-span-9"
           placeholder={lang[langKey].gptSearchPlaceholder}
         />
         <button
-          className="col-span-3 m-4 py-2 px-4 bg-red-700 text-white rounded-lg"
+          className={`col-span-3 m-4 py-2 px-4 ${
+            disableSearch ? " cursor-not-allowed" : ""
+          }  text-white bg-red-700 rounded-lg`}
           onClick={handleGptSearchClick}
+          disabled={disableSearch}
         >
           {lang[langKey].search}
         </button>
