@@ -7,7 +7,7 @@ const VideoTitle: React.FC<VideoTitleType> = ({ title, overview }) => {
         <h1 className="text-2xl font-bold">{title}</h1>
         <p className="hidden md:inline-block py-6 text-lg w-1/2">{overview}</p>
         <div className="my-4 ">
-          <button className=" bg-white text-black p-4 w-[180px] text-lg pointer-events-none rounded-lg hover:bg-opacity-70">
+          <button className="cursor-not-allowed bg-white text-black p-4 w-[180px] text-lg rounded-lg hover:bg-opacity-70">
             ▶️ Play
           </button>
           <button className="hidden md:inline-block mx-2 w-[180px] pointer-events-none bg-gray-500 text-white p-4 px-12 text-lg bg-opacity-50 rounded-lg">
