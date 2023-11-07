@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Browse from "./components/browse/Browse";
 import Login from "./components/Login";
+import Details from "./components/Details";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -10,6 +11,14 @@ function App() {
     },
     {
       path: "/browse",
+      element: <Browse />,
+    },
+    {
+      path: "/details",
+      element: <Details />,
+    },
+    {
+      path: "*",
       element: <Browse />,
     },
   ]);
