@@ -148,3 +148,12 @@ export interface VideoTitleType {
     title: string;
     overview: string;
 }
+
+export interface LanguageTranslations {
+    [key: string] : string;
+  };
+    
+  export interface LangType {
+    en: LanguageTranslations;
+    hindi: LanguageTranslations;
+  }
