@@ -24,7 +24,6 @@ export interface Result {
     vote_count:        number;
 };
 export interface GptSliceType {
-    showGptSearch: boolean,
     movieResults: Result[][] | null,
     movieNames: string[] | null,
 };
