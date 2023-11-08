@@ -11,7 +11,11 @@ const MovieList: React.FC<MovieListType> = ({ title, movies }) => {
           {movies?.map(
             (movie) =>
               movie.poster_path && (
-                <MovieCard key={movie.id} posterPath={movie.poster_path} />
+                <MovieCard
+                  key={movie.id}
+                  posterPath={movie.poster_path}
+                  movieId={movie.id}
+                />
               )
           )}
         </div>

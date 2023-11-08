@@ -19,7 +19,7 @@ const Browse = () => {
       {showGptSearch ? (
         <GptSearch />
       ) : (
-        <div className="bg-black w-full no-scrollbar">
+        <div className="bg-black w-full">
           <MainContainer />
           <SecondaryContainer />
         </div>

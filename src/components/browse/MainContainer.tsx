@@ -13,7 +13,7 @@ const MainContainer: React.FC = () => {
   const { original_title, overview, id } = mainMovie;
 
   return (
-    <div className="w-[100%] no-scrollbar">
+    <div className="w-[100%]">
       <VideoTitle title={original_title} overview={overview} />
       <VideoBackground movieId={id} />
     </div>

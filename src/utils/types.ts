@@ -138,6 +138,7 @@ export interface MovieListType {
 
 export interface MovieCardType {
     posterPath: string;
+    movieId: number;
 }
 
 export interface VideoBackgroundType {
