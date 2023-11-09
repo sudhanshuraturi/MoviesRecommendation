@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import lang from "../../utils/languageConstants";
-import { LanguageTranslations, MovieListType } from "../../utils/types";
+import { MovieListType } from "../../utils/types";
 
 import MovieCard from "./MovieCard";
 import { RootState } from "../../redux/store";

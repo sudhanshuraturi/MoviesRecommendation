@@ -44,8 +44,8 @@ const Header = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const l = useLocation();
-  console.log(l);
+  const location = useLocation();
+
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(changeLanguage(e.target.value));
   };
@@ -71,7 +71,7 @@ const Header = () => {
             ))}
           </select>
 
-          {l.pathname !== "/gpt" && (
+          {location.pathname !== "/gpt" && (
             <button
               className="py-2 px-4 mx-4 my-2 bg-red-700 text-white rounded-lg"
               onClick={() => {
