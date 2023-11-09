@@ -14,7 +14,7 @@ const MainContainer: React.FC = () => {
 
   return (
     <div className="w-[100%]">
-      <VideoTitle title={original_title} overview={overview} />
+      <VideoTitle title={original_title} overview={overview} id={id} />
       <VideoBackground movieId={id} />
     </div>
   );

@@ -147,6 +147,7 @@ export interface VideoBackgroundType {
 export interface VideoTitleType {
     title: string;
     overview: string;
+    id: number;
 }
 
 export interface LanguageTranslations {

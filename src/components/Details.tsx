@@ -42,8 +42,6 @@ const Details = () => {
   // const movieData = getData(id!);
   // console.log(movies, gptMovies);
 
-  let x =
-    "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/hTP1DtLGFamjfu8WqjnuQdP1n4i.jpg";
   return (
     <>
       <Header />
@@ -71,7 +69,7 @@ const Details = () => {
             } h-[70%] w-[70%] ml-5 p-10 overflow-y-auto no-scrollbar rounded-2xl bg-slate-600 text-white`}
           >
             <div className="flex xs:block justify-between">
-              <h1 className="text-4xl font-extrabold">{mData.title}</h1>
+              <h1 className="text-3xl font-extrabold">{mData.title}</h1>
               {mData.overview && (
                 <button
                   onClick={() => navigate(-1)}
