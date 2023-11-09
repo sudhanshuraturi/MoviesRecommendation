@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IMG_CDN_URL } from "../../utils/constants";
 import { MovieCardType } from "../../utils/types";
 

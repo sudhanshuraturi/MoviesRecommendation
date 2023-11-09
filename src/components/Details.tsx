@@ -5,10 +5,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
 import { IMG_CDN_URL } from "../utils/constants";
+import lang from "../utils/languageConstants";
 
 const Details = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const langKey = useSelector((store: RootState) => store.config.lang);
   const [mData, setMData] = useState({ title: "", overview: "", poster: "" });
 
   if (!id) navigate(-1);
@@ -29,7 +31,6 @@ const Details = () => {
     fetch(url, options)
       .then((res: { json: () => any }) => res.json())
       .then((json: any) => {
-        // console.log(json.original_title, json.overview);
         setMData({
           overview: json.overview,
           title: json.original_title,
@@ -38,9 +39,6 @@ const Details = () => {
       })
       .catch((err: string) => console.error("error:" + err));
   }, [id]);
-
-  // const movieData = getData(id!);
-  // console.log(movies, gptMovies);
 
   return (
     <>
@@ -75,13 +73,13 @@ const Details = () => {
                   onClick={() => navigate(-1)}
                   className="bg-white text-slate-600 p-2 rounded-2xl"
                 >
-                  Back⬅️
+                  {lang[langKey].back}⬅️
                 </button>
               )}
             </div>
             <div className="mt-8">
               {mData.overview && (
-                <h2 className="text-xl font-bold">Overview</h2>
+                <h2 className="text-xl font-bold">{lang[langKey].overview}</h2>
               )}
               <p className="mt-3">{mData.overview}</p>
             </div>

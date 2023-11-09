@@ -10,7 +10,9 @@ const lang: LangType = {
       nowPlaying: "Now Playing",
       popular: "Popular",
       gptSearch: "GPT Search",
-      signOut: "Sign Out"
+      signOut: "Sign Out",
+      back: "Back",
+      overview: "Overview"
     },
     hindi: {
       search: "खोज",
@@ -20,7 +22,9 @@ const lang: LangType = {
       nowPlaying: "अब चल रहे हैं",
       popular: "लोकप्रिय",
       gptSearch: "जीपीटी खोज",
-      signOut: "साइन आउट"
+      signOut: "साइन आउट",
+      back: "पीछे",
+      overview: "अवलोकन"
     },
 };
   

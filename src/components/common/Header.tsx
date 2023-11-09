@@ -7,12 +7,13 @@ import { auth } from "../../utils/firebase";
 import { addUser, removeUser } from "../../redux/slices/userSlice";
 import { changeLanguage } from "../../redux/slices/configSlice";
 import { RootState } from "../../redux/store";
+import lang from "../../utils/languageConstants";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store: RootState) => store.user);
-
+  const langKey = useSelector((store: RootState) => store.config.lang);
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {})
@@ -77,7 +78,7 @@ const Header = () => {
                 navigate("/gpt");
               }}
             >
-              GPT Search
+              {lang[langKey].gptSearch}
             </button>
           )}
           <img
@@ -86,7 +87,7 @@ const Header = () => {
             src={user?.photoURL}
           />
           <button onClick={handleSignOut} className="font-bold text-white ">
-            (Sign Out)
+            ({lang[langKey].signOut})
           </button>
         </div>
       )}
