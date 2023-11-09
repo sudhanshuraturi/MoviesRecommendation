@@ -11,6 +11,7 @@ import {
 import { auth } from "../utils/firebase";
 import { addUser } from "../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
+import { FirebaseError } from "firebase/app";
 
 const Login: React.FC = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -22,72 +23,70 @@ const Login: React.FC = () => {
   const password = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
-  const handleButtonClick = () => {
-    const message = checkValidData(
-      email?.current?.value,
-      password?.current?.value
-    );
+  const handleButtonClick = async () => {
+    try {
+      const message = checkValidData(
+        email?.current?.value,
+        password?.current?.value
+      );
+      setErrorMessage(message);
 
-    setErrorMessage(message);
+      if (message) return;
 
-    if (message) return;
-    if (email.current && password.current) {
-      if (!isSignInForm) {
-        // Sign Up Logic
-        createUserWithEmailAndPassword(
-          auth,
-          email?.current?.value,
-          password?.current?.value
-        )
-          .then((userCredential) => {
-            const user = userCredential.user;
-            updateProfile(user, {
-              displayName: name?.current?.value,
-              photoURL: USER_AVATAR,
-            })
-              .then(() => {
-                const { uid, email, displayName, photoURL } =
-                  auth.currentUser || {};
-                if (uid && email && displayName && photoURL) {
-                  dispatch(
-                    addUser({
-                      uid: uid,
-                      email: email,
-                      displayName: displayName,
-                      photoURL: photoURL,
-                    })
-                  );
-                  navigate("/browse");
-                } else {
-                  throw new Error("Incomplete User Data");
-                }
+      if (email.current && password.current) {
+        if (!isSignInForm) {
+          // Sign Up Logic
+          const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            email?.current?.value,
+            password?.current?.value
+          );
+
+          const user = userCredential.user;
+
+          await updateProfile(user, {
+            displayName: name?.current?.value,
+            photoURL: USER_AVATAR,
+          });
+
+          const {
+            uid,
+            email: emailFetched,
+            displayName,
+            photoURL,
+          } = auth.currentUser || {};
+
+          if (uid && emailFetched && displayName && photoURL) {
+            dispatch(
+              addUser({
+                uid: uid,
+                email: emailFetched,
+                displayName: displayName,
+                photoURL: photoURL,
               })
-              .catch((error) => {
-                setErrorMessage(error.message);
-              });
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            setErrorMessage(errorCode + "-" + errorMessage);
-          });
-      } else {
-        // Sign In Logic
-        signInWithEmailAndPassword(
-          auth,
-          email?.current?.value,
-          password?.current?.value
-        )
-          .then((userCredential) => {
-            // Signed in
-            // const user = userCredential.user;
+            );
             navigate("/browse");
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            setErrorMessage(errorCode + "-" + errorMessage);
-          });
+          } else {
+            throw new Error("Incomplete User Data");
+          }
+        } else {
+          // Sign In Logic
+          await signInWithEmailAndPassword(
+            auth,
+            email?.current?.value,
+            password?.current?.value
+          );
+
+          navigate("/browse");
+        }
+      }
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        const errorCode = error?.code;
+        const errorMessage = error?.message;
+        setErrorMessage(`${errorCode} - ${errorMessage}`);
+      } else {
+        setErrorMessage(`Unhandled Error: ${error}`);
       }
     }
   };
