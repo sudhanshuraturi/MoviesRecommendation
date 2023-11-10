@@ -10,10 +10,12 @@ import { RootState } from "../../redux/store";
 import lang from "../../utils/languageConstants";
 
 const Header = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store: RootState) => store.user);
   const langKey = useSelector((store: RootState) => store.config.lang);
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {})
@@ -44,8 +46,6 @@ const Header = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const location = useLocation();
-
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(changeLanguage(e.target.value));
   };
@@ -63,6 +63,7 @@ const Header = () => {
           <select
             className="p-2 m-2 bg-gray-900 text-white"
             onChange={handleLanguageChange}
+            value={langKey}
           >
             {SUPPORTED_LANGUAGES.map((lang) => (
               <option key={lang.identifier} value={lang.identifier}>
