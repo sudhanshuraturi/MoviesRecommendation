@@ -78,6 +78,7 @@ const GptSearchBar = () => {
           }  text-white bg-red-700 rounded-lg`}
           onClick={handleGptSearchClick}
           disabled={disableSearch}
+          type="submit"
         >
           {lang[langKey].search}
         </button>
