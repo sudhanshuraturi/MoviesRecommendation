@@ -10,7 +10,7 @@ const MovieList: React.FC<MovieListType> = ({ title, movies }) => {
   return (
     <div className="p-6">
       <h1 className="text-lg font-extrabold py-4 text-white">
-        {lang[langKey][title]}
+        {lang[langKey][title] ? lang[langKey][title] : title}
       </h1>
       <div className="flex overflow-x-scroll no-scrollbar">
         <div className="flex gap-4">
