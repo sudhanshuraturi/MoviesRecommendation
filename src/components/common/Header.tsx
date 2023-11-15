@@ -59,7 +59,7 @@ const Header = () => {
         <img src={LOGO} alt="logo" />
       </div>
       {user && (
-        <div className="flex p-2 justify-between">
+        <div className="flex p-2 justify-between ">
           <select
             className="p-2 m-2 bg-gray-900 text-white"
             onChange={handleLanguageChange}

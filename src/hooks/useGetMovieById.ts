@@ -1,30 +1,53 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { API_OPTIONS } from "../utils/constants";
-import { RootState } from "../redux/store";
+import { useEffect, useState } from 'react';
+import { IMG_CDN_URL, MAX_CACHE_SIZE } from '../utils/constants';
+import { UseMovieDataResult, Cache, MovieDataType } from '../utils/types';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { useDispatch } from 'react-redux';
+import { addToMovieIdCache, removeFromMovieCache } from '../redux/slices/moviesSlice';
 
 
-const useGetMovieById = () => {
-//     const dispatch = useDispatch();
-    
+const useGetMovieById = (id?: string): UseMovieDataResult => {
+  const cache = useSelector((store:RootState) => store.movies.movieCache);
+  const dispatch = useDispatch();
 
-//   const getNowPlayingMovies = async () => {
-//     const data = await fetch(
-//       "https://api.themoviedb.org/3/movie/now_playing?page=1",
-//       API_OPTIONS
-//     );
-//     const json = await data.json();
-//     dispatch(addNowPlayingMovies(json.results));
-//   };
+  const [error, setError] = useState<string | null>(null);
 
-//   useEffect(() => {
-//     !nowPlayingMovies && getNowPlayingMovies();
-//   // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, [nowPlayingMovies]);
-}
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
+        const options = {
+          method: 'GET',
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${process.env.REACT_APP_TMDB_KEY}`,
+          },
+        };
+
+        const response = await fetch(url, options);
+        const json = await response.json();
+        json.poster_path = IMG_CDN_URL+json?.poster_path;
+  
+        const newCache: Cache = { ...cache, [id!]: json };
+        const keys = Object.keys(newCache);
+        
+        if (keys.length > MAX_CACHE_SIZE) {
+            await dispatch(removeFromMovieCache());
+        }
+        dispatch(addToMovieIdCache(newCache));
+
+      } catch (err) {
+        setError('Error fetching movie data');
+      }
+    };
+    if(id && !cache[id])
+    fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, cache]);
+  
+  const mData: MovieDataType = id && cache[id] ? cache[id] : {overview: '',title: '',poster_path: ''};
+  return { mData, error };
+};
 
 export default useGetMovieById;
-
-
-
-

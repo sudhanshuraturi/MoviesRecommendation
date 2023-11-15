@@ -4,7 +4,8 @@ import { LangType } from "./types";
 const lang: LangType = {
     en: {
       search: "Search",
-      gptSearchPlaceholder: "Try: Comedy and Action in Same Movie...",
+      gptSearchPlaceholder: "Discover new movies! Ask me anything...",
+      gptSearchExample: "Try: 'Comedy and Action in Same Movie'",
       play: "Play",
       moreInfo: "More Info",
       nowPlaying: "Now Playing",
@@ -16,7 +17,8 @@ const lang: LangType = {
     },
     hindi: {
       search: "खोज",
-      gptSearchPlaceholder: "कुछ आजमाएं: कॉमेडी और एक्शन एक ही फिल्म में...",
+      gptSearchPlaceholder: "नई फिल्में खोजें! मुझसे कुछ भी पूछें...",
+      gptSearchExample: "कोशिश करें: 'कॉमेडी और एक्शन, एक ही फिल्म में'",
       play: "चलाएं",
       moreInfo: "और जानकारी",
       nowPlaying: "अब चल रहे हैं",

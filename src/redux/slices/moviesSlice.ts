@@ -7,6 +7,7 @@ const moviesSlice = createSlice({
     nowPlayingMovies: null,
     popularMovies: null,
     trailerVideo: null,
+    movieCache: {},
   } as AllMovieType,
   reducers: {
     addNowPlayingMovies: (state, action) => {
@@ -18,10 +19,17 @@ const moviesSlice = createSlice({
     addTrailerVideo: (state, action) => {
       state.trailerVideo = action.payload;
     },
+    addToMovieIdCache: (state, action) => {
+      state.movieCache = action.payload;
+    },
+    removeFromMovieCache: (state) => {
+      const keys = Object.keys(state.movieCache);
+      delete state.movieCache[keys[0]];
+    }
   },
 });
 
-export const { addNowPlayingMovies, addTrailerVideo, addPopularMovies } =
+export const { addNowPlayingMovies, addTrailerVideo, addPopularMovies, addToMovieIdCache, removeFromMovieCache } =
   moviesSlice.actions;
 
 export default moviesSlice.reducer;

@@ -1,12 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { UserType } from '../../utils/types';
 
-interface UserType{
-    uid: string,
-    email: string,
-    displayName: string,
-    photoURL: string,            
-}
 export const userSlice = createSlice({
   name: 'user',
   initialState: null as UserType | null,

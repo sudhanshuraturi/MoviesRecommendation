@@ -120,7 +120,8 @@ name:         string;
 export interface AllMovieType{
 nowPlayingMovies: MovieType[] | null,
 popularMovies: PopularMovieType[] | null,
-trailerVideo: VideoType | null,            
+trailerVideo: VideoType | null,   
+movieCache: Cache         
 }
   
  export interface UserType{
@@ -158,3 +159,26 @@ export interface LanguageTranslations {
     en: LanguageTranslations;
     hindi: LanguageTranslations;
   }
+
+  
+export interface MovieDataType {
+    overview: string;
+    title: string;
+    poster_path: string;
+  }
+  
+export interface Cache {
+    [id: string]: MovieDataType;
+  }
+  
+export interface UseMovieDataResult {
+    mData: MovieDataType;
+    error: string | null;
+  }
+
+export interface UserType{
+    uid: string,
+    email: string,
+    displayName: string,
+    photoURL: string,            
+}

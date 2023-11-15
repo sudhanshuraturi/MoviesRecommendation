@@ -5,8 +5,6 @@ import { useEffect } from "react";
 
 
 const useMovieTrailer = (query: string) => {
-    const dispatch = useDispatch();
-    const trailerVideo = useSelector((store:RootState) => store.movies.trailerVideo);
     
     // search movie in TMDB
     const searchMovieTMDB = async (query: string) => {

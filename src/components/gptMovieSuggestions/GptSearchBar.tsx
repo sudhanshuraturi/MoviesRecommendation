@@ -56,9 +56,9 @@ const GptSearchBar = () => {
   };
 
   return (
-    <div className="pt-[35%] md:pt-[10%] flex justify-center">
+    <div className="pt-[35%] sm:pt-[25%] md:pt-[10%] flex justify-center">
       <form
-        className="w-full md:w-1/2 bg-black grid grid-cols-12"
+        className="w-full lg:w-1/2 bg-black grid grid-cols-12"
         onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => e.preventDefault()}
       >
         <input
@@ -69,11 +69,12 @@ const GptSearchBar = () => {
               : setSearchDisabled(true);
           }}
           type="text"
-          className=" p-4 m-4 col-span-9"
+          className=" p-4 m-4 mr-0 col-span-9"
           placeholder={lang[langKey].gptSearchPlaceholder}
         />
+
         <button
-          className={`col-span-3 m-4 py-2 px-4 ${
+          className={`col-span-3 m-4 py-2 px-4 sm:px-0 ${
             disableSearch ? " cursor-not-allowed" : ""
           }  text-white bg-red-700 rounded-lg`}
           onClick={handleGptSearchClick}
