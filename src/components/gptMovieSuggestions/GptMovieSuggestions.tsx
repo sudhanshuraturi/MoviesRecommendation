@@ -11,7 +11,7 @@ const GptMovieSuggestions = () => {
   if (!movieNames) {
     return (
       <div className="flex justify-center mt-5">
-        <div className="text-white bg-slate-600 p-4 font-extrabold font-medium ">
+        <div className="text-white bg-slate-600 p-4 font-medium ">
           {lang[langKey].gptSearchExample}
         </div>
       </div>

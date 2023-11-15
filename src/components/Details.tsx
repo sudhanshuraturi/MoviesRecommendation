@@ -10,7 +10,7 @@ const Details = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const langKey = useSelector((store: RootState) => store.config.lang);
-  const { mData, error } = useGetMovieById(id);
+  const { mData } = useGetMovieById(id);
 
   if (!id) navigate(-1);
 
