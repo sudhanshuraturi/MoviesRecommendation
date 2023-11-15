@@ -72,6 +72,7 @@ const GptSearchBar: React.FC<GptSearchBarType> = ({ setLoading }) => {
               setSearchDisabled(true);
             }
           }}
+          type="button"
         >
           ❌
         </button>
