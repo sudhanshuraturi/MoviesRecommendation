@@ -5,7 +5,7 @@ const lang: LangType = {
     en: {
       search: "Search",
       gptSearchPlaceholder: "Discover new movies! Ask me anything...",
-      gptSearchExample: "Try: 'Comedy and Action in Same Movie'",
+      gptSearchExample: "Try: 'comedy and action in the same movie'",
       play: "Play",
       moreInfo: "More Info",
       nowPlaying: "Now Playing",

@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface LanguageTranslations {
     search: string;
     gptSearchPlaceholder: string;
@@ -181,4 +183,11 @@ export interface UserType{
     email: string,
     displayName: string,
     photoURL: string,            
+}
+export interface GptMovieSuggestionsType {
+  loading: boolean;
+}
+
+export interface GptSearchBarType {
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }

@@ -1,57 +1,49 @@
-import openai from "../../utils/openai";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import lang from "../../utils/languageConstants";
-import { API_OPTIONS } from "../../utils/constants";
+import { NO_SUGGESTION } from "../../utils/constants";
 import { addGptMovieResult } from "../../redux/slices/gptSlice";
 import { RootState } from "../../redux/store";
+import useSearchMovie from "../../hooks/useSearchMovie";
+import useGptSearch from "../../hooks/useGptSearch";
+import { GptSearchBarType } from "../../utils/types";
 
-const GptSearchBar = () => {
+const GptSearchBar: React.FC<GptSearchBarType> = ({ setLoading }) => {
   const [disableSearch, setSearchDisabled] = useState(true);
   const dispatch = useDispatch();
   const langKey = useSelector((store: RootState) => store.config.lang);
   const searchText = useRef<HTMLInputElement>(null);
-
-  // search movie in TMDB
-  const searchMovieTMDB = async (movie: string) => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/search/movie?query=" +
-        movie +
-        "&include_adult=false&language=en-US&page=1",
-      API_OPTIONS
-    );
-    const json = await data.json();
-
-    return json.results;
-  };
+  const { searchMovieTMDB } = useSearchMovie();
+  const { searchSuggestions } = useGptSearch();
 
   const handleGptSearchClick = async () => {
-    const gptQuery =
-      "Act as a Movie Recommendation system and suggest some movies for the query : " +
-      searchText?.current?.value +
-      ". only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya";
-
-    const gptResults = await openai.chat.completions.create({
-      messages: [{ role: "user", content: gptQuery }],
-      model: "gpt-3.5-turbo",
-    });
-
-    if (!gptResults.choices) {
-      // TODO: Write Error Handling
-    }
-
-    const gptMovies = gptResults?.choices?.[0]?.message?.content?.split(",");
-    const promiseArray = gptMovies?.map((movie: string) =>
-      searchMovieTMDB(movie)
-    );
-    // [Promise, Promise, Promise, Promise, Promise]
-
-    if (promiseArray) {
-      const tmdbResults = await Promise.all(promiseArray);
-
-      dispatch(
-        addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults })
+    try {
+      setLoading(true);
+      const gptMovies = await searchSuggestions(searchText?.current?.value!);
+      if (
+        gptMovies?.[0] &&
+        gptMovies?.length === 1 &&
+        NO_SUGGESTION.indexOf(gptMovies?.[0]) > -1
+      ) {
+        throw "No Recommendations";
+      }
+      const promiseArray = gptMovies?.map((movie: string) =>
+        searchMovieTMDB(movie)
       );
+
+      if (promiseArray) {
+        const tmdbResults = await Promise.all(promiseArray);
+        setLoading(false);
+        dispatch(
+          addGptMovieResult({
+            movieNames: gptMovies,
+            movieResults: tmdbResults,
+          })
+        );
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
   };
 
@@ -64,15 +56,25 @@ const GptSearchBar = () => {
         <input
           ref={searchText}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            e.target?.value
+            e.target?.value && e.target?.value !== ""
               ? setSearchDisabled(false)
               : setSearchDisabled(true);
           }}
           type="text"
-          className=" p-4 m-4 mr-0 col-span-9"
+          className=" p-4 m-4 mr-0 col-span-8 focus:outline-none"
           placeholder={lang[langKey].gptSearchPlaceholder}
         />
-
+        <button
+          className="col-span-1 m-4 ml-0 mr-0 pr-4 bg-white"
+          onClick={() => {
+            if (searchText.current) {
+              searchText.current.value = "";
+              setSearchDisabled(true);
+            }
+          }}
+        >
+          ❌
+        </button>
         <button
           className={`col-span-3 m-4 py-2 px-4 sm:px-0 ${
             disableSearch ? " cursor-not-allowed" : ""
