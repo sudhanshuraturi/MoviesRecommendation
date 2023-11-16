@@ -16,8 +16,6 @@ const Details = () => {
 
   return (
     <>
-      <Header />
-
       <div className="h-full w-full overflow-hidden">
         {mData?.poster_path ? (
           <img

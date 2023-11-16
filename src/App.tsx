@@ -5,8 +5,11 @@ import Details from "./components/Details";
 import GPTSearch from "./components/gptMovieSuggestions/GptSearch";
 import Home from "./components/Home";
 import { BROWSE_ROUTE, DETAILS_ROUTE, GPT_ROUTE } from "./utils/constants";
+import { useSelector } from "react-redux";
+import { RootState } from "./redux/store";
 
 function App() {
+  const user = useSelector((store: RootState) => store.user);
   const appRouter = createBrowserRouter([
     {
       path: "/",
@@ -14,7 +17,7 @@ function App() {
       children: [
         {
           path: "/",
-          element: <Login />,
+          element: user && user.uid ? <Browse /> : <Login />,
         },
         {
           path: BROWSE_ROUTE,

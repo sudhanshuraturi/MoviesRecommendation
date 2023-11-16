@@ -8,7 +8,7 @@ const MovieCard: React.FC<MovieCardType> = ({ posterPath, movieId: id }) => {
   if (!posterPath) return null;
   return (
     <div
-      className="w-[140px] hover:scale-y-105"
+      className="w-[140px] hover:scale-y-105 cursor-pointer"
       onClick={() => navigate(`${DETAILS_ROUTE}/${id}`)}
     >
       <img alt="Movie Card" src={IMG_CDN_URL + posterPath} />

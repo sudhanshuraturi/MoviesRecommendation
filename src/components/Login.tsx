@@ -105,7 +105,6 @@ const Login: React.FC = () => {
       style={{ backgroundImage: `url(${BACKGROUND})` }}
     >
       <div className="bg-black h-screen w-screen bg-opacity-40">
-        <Header />
         <form
           onSubmit={(e) => e.preventDefault()}
           className="absolute mx-auto right-0 left-0 my-36 p-12 bg-black text-white lg:w-1/4 sm:w-1/3 bg-opacity-90"

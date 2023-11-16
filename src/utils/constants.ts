@@ -23,7 +23,7 @@ export const BG_URL =
 
 export const MAX_CACHE_SIZE = 5;
 
-export const NO_SUGGESTION = ['Unfortunately', 'I apologize', 'Sorry', "I'm sorry"];
+export const NO_SUGGESTION = '123SSSorry';
 
 export const IFRAME = {
   link_0: 'https://www.youtube.com/embed/',

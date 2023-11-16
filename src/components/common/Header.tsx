@@ -61,7 +61,7 @@ const Header = () => {
   return (
     <div className="absolute w-full px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row items-center justify-between">
       <div
-        className="w-[150px] mx-auto md:mx-0"
+        className="w-[150px] mx-auto md:mx-0 cursor-pointer"
         onClick={() => navigate(BROWSE_ROUTE)}
       >
         <img src={LOGO} alt="logo" />

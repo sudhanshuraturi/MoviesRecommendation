@@ -24,14 +24,14 @@ const GptSearchBar: React.FC<GptSearchBarType> = ({ setLoading }) => {
     setShowError(true);
     setTimeout(() => {
       setShowError(false);
-    }, 1000);
+    }, 5000);
   };
   const handleGptSearchClick = async () => {
     dispatch(clearGptMovieResult());
     try {
       setLoading(true);
       const gptMovies = await searchSuggestions(searchText?.current?.value!);
-      if (gptMovies?.[0] && NO_SUGGESTION.indexOf(gptMovies?.[0]) > -1) {
+      if (gptMovies?.[0] && gptMovies?.[0] === NO_SUGGESTION) {
         showNoRecommendation();
         setLoading(false);
         return;
