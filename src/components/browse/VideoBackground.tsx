@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import useMovieTrailer from "../../hooks/useMovieTrailer";
 import { RootState } from "../../redux/store";
 import { VideoBackgroundType } from "../../utils/types";
+import { IFRAME } from "../../utils/constants";
 
 const VideoBackground: React.FC<VideoBackgroundType> = ({ movieId }) => {
   const trailerVideo = useSelector(
@@ -15,13 +16,9 @@ const VideoBackground: React.FC<VideoBackgroundType> = ({ movieId }) => {
       <iframe
         id="ytplayer"
         className="h-screen w-full pointer-events-none"
-        src={
-          "https://www.youtube.com/embed/" +
-          trailerVideo?.key +
-          "?autoplay=1&mute=1&controls=0&loop=1"
-        }
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        src={IFRAME.link_0 + trailerVideo?.key + IFRAME.link_1}
+        title={IFRAME.title}
+        allow={IFRAME.allow}
       ></iframe>
     </div>
   );

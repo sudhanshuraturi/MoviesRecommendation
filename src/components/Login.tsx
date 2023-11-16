@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import Header from "./common/Header";
-import { USER_AVATAR, BACKGROUND } from "../utils/constants";
+import { USER_AVATAR, BACKGROUND, BROWSE_ROUTE } from "../utils/constants";
 import { checkValidData } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
@@ -65,7 +65,7 @@ const Login: React.FC = () => {
                 photoURL: photoURL,
               })
             );
-            navigate("/browse");
+            navigate(BROWSE_ROUTE);
           } else {
             throw new Error("Incomplete User Data");
           }
@@ -77,7 +77,7 @@ const Login: React.FC = () => {
             password?.current?.value
           );
 
-          navigate("/browse");
+          navigate(BROWSE_ROUTE);
         }
       }
     } catch (error) {

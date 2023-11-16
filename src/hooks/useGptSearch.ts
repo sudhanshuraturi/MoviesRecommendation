@@ -11,7 +11,7 @@ const useGptSearch = () => {
     const gptQuery =
         "Act as a Movie Recommendation system and suggest some movies for the query : " +
         query +
-        ". only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya";
+        ". only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya. In case the query provided does not mean anything as per english language, reply you cant provide anything on this as query does not mean anything, whenever you provide no suggestion you have to start the sentence with 'Sorry, '";
     try {
       const gptResults = await openai.chat.completions.create({
         messages: [{ role: "user", content: gptQuery }],

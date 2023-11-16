@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { IMG_CDN_URL } from "../../utils/constants";
+import { DETAILS_ROUTE, IMG_CDN_URL } from "../../utils/constants";
 import { MovieCardType } from "../../utils/types";
 
 const MovieCard: React.FC<MovieCardType> = ({ posterPath, movieId: id }) => {
@@ -9,7 +9,7 @@ const MovieCard: React.FC<MovieCardType> = ({ posterPath, movieId: id }) => {
   return (
     <div
       className="w-[140px] hover:scale-y-105"
-      onClick={() => navigate(`/details/${id}`)}
+      onClick={() => navigate(`${DETAILS_ROUTE}/${id}`)}
     >
       <img alt="Movie Card" src={IMG_CDN_URL + posterPath} />
     </div>

@@ -23,4 +23,17 @@ export const BG_URL =
 
 export const MAX_CACHE_SIZE = 5;
 
-export const NO_SUGGESTION = ['Unfortunately', 'I apologize', 'Sorry']
+export const NO_SUGGESTION = ['Unfortunately', 'I apologize', 'Sorry', "I'm sorry"];
+
+export const IFRAME = {
+  link_0: 'https://www.youtube.com/embed/',
+  link_1: '?autoplay=1&mute=1&controls=0&loop=1',
+  title: 'YouTube video player',
+  allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+};
+
+export const LOADING_TEXT = 'Loading...';
+
+export const GPT_ROUTE = '/gpt';
+export const BROWSE_ROUTE = '/browse';
+export const DETAILS_ROUTE = '/details';

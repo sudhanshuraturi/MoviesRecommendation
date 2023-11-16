@@ -5,6 +5,7 @@ import lang from "../../utils/languageConstants";
 import { useDispatch } from "react-redux";
 import { clearGptMovieResult } from "../../redux/slices/gptSlice";
 import { GptMovieSuggestionsType } from "../../utils/types";
+import { LOADING_TEXT } from "../../utils/constants";
 
 const GptMovieSuggestions: React.FC<GptMovieSuggestionsType> = ({
   loading,
@@ -18,7 +19,7 @@ const GptMovieSuggestions: React.FC<GptMovieSuggestionsType> = ({
     return (
       <div className="flex justify-center mt-5">
         <div className="text-white bg-slate-600 p-4 font-medium ">
-          {loading ? "Loading..." : lang[langKey].gptSearchExample}
+          {loading ? LOADING_TEXT : lang[langKey].gptSearchExample}
         </div>
       </div>
     );

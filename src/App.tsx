@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import Details from "./components/Details";
 import GPTSearch from "./components/gptMovieSuggestions/GptSearch";
 import Home from "./components/Home";
+import { BROWSE_ROUTE, DETAILS_ROUTE, GPT_ROUTE } from "./utils/constants";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -16,15 +17,15 @@ function App() {
           element: <Login />,
         },
         {
-          path: "/browse",
+          path: BROWSE_ROUTE,
           element: <Browse />,
         },
         {
-          path: "/gpt",
+          path: GPT_ROUTE,
           element: <GPTSearch />,
         },
         {
-          path: "/details/:id",
+          path: `${DETAILS_ROUTE}/:id`,
           element: <Details />,
         },
         {
