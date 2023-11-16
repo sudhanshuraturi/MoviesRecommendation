@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import lang from "../../utils/languageConstants";
-import { NO_SUGGESTION } from "../../utils/constants";
 import {
   addGptMovieResult,
   clearGptMovieResult,
@@ -14,38 +13,44 @@ import { GptSearchBarType } from "../../utils/types";
 const GptSearchBar: React.FC<GptSearchBarType> = ({ setLoading }) => {
   const [disableSearch, setSearchDisabled] = useState(true);
   const [showError, setShowError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const dispatch = useDispatch();
   const langKey = useSelector((store: RootState) => store.config.lang);
   const searchText = useRef<HTMLInputElement>(null);
   const { searchMovieTMDB } = useSearchMovie();
   const { searchSuggestions } = useGptSearch();
 
-  const showNoRecommendation = () => {
+  const showNoRecommendation = (str: string) => {
+    setErrorMsg(() => str);
     setShowError(true);
     setTimeout(() => {
       setShowError(false);
-    }, 5000);
+    }, 10000);
   };
   const handleGptSearchClick = async () => {
     dispatch(clearGptMovieResult());
     try {
       setLoading(true);
       const gptMovies = await searchSuggestions(searchText?.current?.value!);
-      if (gptMovies?.[0] && gptMovies?.[0] === NO_SUGGESTION) {
-        showNoRecommendation();
+
+      if (
+        searchText?.current?.value &&
+        gptMovies?.includes(`"${searchText?.current?.value}"`)
+      ) {
+        showNoRecommendation(gptMovies);
         setLoading(false);
         return;
       }
-      const promiseArray = gptMovies?.map((movie: string) =>
-        searchMovieTMDB(movie)
-      );
+      const promiseArray = gptMovies
+        ?.split(",")
+        ?.map((movie: string) => searchMovieTMDB(movie));
 
       if (promiseArray) {
         const tmdbResults = await Promise.all(promiseArray);
         setLoading(false);
         dispatch(
           addGptMovieResult({
-            movieNames: gptMovies,
+            movieNames: gptMovies?.split(","),
             movieResults: tmdbResults,
           })
         );
@@ -103,7 +108,7 @@ const GptSearchBar: React.FC<GptSearchBarType> = ({ setLoading }) => {
       {showError && (
         <div className=" flex justify-center ">
           <div className="text-white font-bold bg-red-700 w-1/2 text-center mt-6 mb-0 p-3">
-            No Recommendations On Provided Input
+            {errorMsg}
           </div>
         </div>
       )}

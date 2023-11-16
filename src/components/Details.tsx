@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Header from "./common/Header";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
