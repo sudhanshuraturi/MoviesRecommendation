@@ -15,7 +15,20 @@ const lang: LangType = {
       back: "Back",
       overview: "Overview"
     },
-    hindi: {
+    ru: {
+      search: "поиск",
+      gptSearchPlaceholder: "Откройте для себя новые фильмы! Спрашивай о чем угодно...",
+      gptSearchExample: "Попробуйте: «комедия и боевик в одном фильме»",
+      play: "Играть",
+      moreInfo: "Больше информации",
+      nowPlaying: "Сейчас играет",
+      popular: "Популярный",
+      gptSearch: "GPT-поиск",
+      signOut: "Выход",
+      back: "Назад",
+      overview: "Обзор"
+    },
+    hi: {
       search: "खोज",
       gptSearchPlaceholder: "नई फिल्में खोजें! मुझसे कुछ भी पूछें...",
       gptSearchExample: "कोशिश करें: 'कॉमेडी और एक्शन, एक ही फिल्म में'",
@@ -27,7 +40,7 @@ const lang: LangType = {
       signOut: "साइन आउट",
       back: "पीछे",
       overview: "अवलोकन"
-    },
+    }
 };
   
   export default lang;

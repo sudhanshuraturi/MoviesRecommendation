@@ -159,7 +159,8 @@ export interface LanguageTranslations {
     
   export interface LangType {
     en: LanguageTranslations;
-    hindi: LanguageTranslations;
+    ru: LanguageTranslations;
+    hi: LanguageTranslations;
   }
 
   
